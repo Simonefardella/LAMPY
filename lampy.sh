@@ -23,7 +23,7 @@ then
     apt-get install -y openssh-server;
     sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
     sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
-    systemctl ssh restart
+    systemctl sshd restart
     echo "*_*_*_*_* Done *_*_*_*_*";
 
     echo "*_*_*_*_* Installing Tree *_*_*_*_*";
