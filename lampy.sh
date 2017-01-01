@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-DBPASSWORD="<YOUR_PASSWORD>" echo "*_*_*_*_*_*_*_*_ Running LAMP Automated installer *_*_*_*_*_*_*_*_";
+DBPASSWORD="<YOUR_PASSWORD>"
+echo "*_*_*_*_*_*_*_*_ Running LAMP Automated installer *_*_*_*_*_*_*_*_";
 if [ "`lsb_release -is`" == "Ubuntu" ] || [ "`lsb_release -is`" == "Debian" ] || [ "`lsb_release -is`" == "Raspbian" ]
 then
 if [ "`whoami`" == "root" ]
