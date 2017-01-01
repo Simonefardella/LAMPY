@@ -20,6 +20,8 @@ then
     apt-get install -y htop;
     apt-get install -y openssh-server;
     sed -i 's/PermitRootLogin yes/PermitRootLogin without-password/g' /etc/ssh/sshd_config
+    sed -i 's/PermitRootLogin yes/PermitRootLogin prohibit-password/g' /etc/ssh/sshd_config
+
     echo "*_*_*_*_* Done *_*_*_*_*";
 
     echo "*_*_*_*_* Installing Tree *_*_*_*_*";
@@ -41,12 +43,12 @@ then
 
     else #Ubuntu non interactive installation
         echo "*_*_*_*_* Ubuntu Mysql & PHPMYADMIN silent install *_*_*_*_*";
-        echo "mysql-server mysql-server/root_password password "$DBPASSWORD | debconf-set-selections
-        echo "mysql-server mysql-server/root_password_again password "$DBPASSWORD | debconf-set-selections
+        echo "mysql-server mysql-server/root_password password $DBPASSWORD" | debconf-set-selections
+        echo "mysql-server mysql-server/root_password_again password $DBPASSWORD" | debconf-set-selections
         echo "phpmyadmin phpmyadmin/dbconfig-install boolean true"| debconf-set-selections
-        echo "phpmyadmin phpmyadmin/app-password-confirm password "$DBPASSWORD | debconf-set-selections
-        echo "phpmyadmin phpmyadmin/mysql/admin-pass password "$DBPASSWORD | debconf-set-selections
-        echo "phpmyadmin phpmyadmin/mysql/app-pass password "$DBPASSWORD | debconf-set-selections
+        echo "phpmyadmin phpmyadmin/app-password-confirm password $DBPASSWORD" | debconf-set-selections
+        echo "phpmyadmin phpmyadmin/mysql/admin-pass password $DBPASSWORD" | debconf-set-selections
+        echo "phpmyadmin phpmyadmin/mysql/app-pass password $DBPASSWORD" | debconf-set-selections
         echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
     fi
 
