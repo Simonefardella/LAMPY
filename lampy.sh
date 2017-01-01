@@ -4,6 +4,8 @@ if [ "`lsb_release -is`" == "Ubuntu" ] || [ "`lsb_release -is`" == "Debian" ] ||
 then
 if [ "`whoami`" == "root" ]
 then
+    export DEBIAN_FRONTEND=noninteractive
+
     echo "*_*_*_*_* Updating System *_*_*_*_*";
     apt-get update -y
     apt-get update --fix-missing -y
