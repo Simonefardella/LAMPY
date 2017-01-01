@@ -21,9 +21,9 @@ then
     echo "*_*_*_*_* Installing Htop, SSH Server and configuring remote SSH Login*_*_*_*_*";
     apt-get install -y htop;
     apt-get install -y openssh-server;
-    sed -i 's/PermitRootLogin yes/PermitRootLogin without-password/g' /etc/ssh/sshd_config
-    sed -i 's/PermitRootLogin yes/PermitRootLogin prohibit-password/g' /etc/ssh/sshd_config
-
+    sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+    sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+    systemctl ssh restart
     echo "*_*_*_*_* Done *_*_*_*_*";
 
     echo "*_*_*_*_* Installing Tree *_*_*_*_*";
@@ -83,7 +83,7 @@ then
     echo "<?php phpinfo(); ?>" > /var/www/html/php/info.php
     chown -R www-data:www-data /var/www/ #Assuming that the owner of www folder is www-data user
     apachectl configtest
-    service apache2 restart;
+    systemctl apache2 restart;
     echo "*_*_*_*_* Done *_*_*_*_*";
 
     echo "*_*_*_*_* Running database privileges granting to root user *_*_*_*_*";
