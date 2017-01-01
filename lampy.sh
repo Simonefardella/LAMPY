@@ -23,7 +23,7 @@ then
     apt-get install -y openssh-server;
     sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
     sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
-    systemctl sshd restart
+    service ssh restart
     echo "*_*_*_*_* Done *_*_*_*_*";
 
     echo "*_*_*_*_* Installing Tree *_*_*_*_*";
@@ -83,12 +83,12 @@ then
     echo "<?php phpinfo(); ?>" > /var/www/html/php/info.php
     chown -R www-data:www-data /var/www/ #Assuming that the owner of www folder is www-data user
     apachectl configtest
-    systemctl apache2 restart;
+    service apache restart;
     echo "*_*_*_*_* Done *_*_*_*_*";
 
     echo "*_*_*_*_* Running database privileges granting to root user *_*_*_*_*";
-    mysql -uroot -p$DBPASSWORD -e "grant all privileges on *.* to 'root'@'%' identified by '$DBPASSWORD' WITH GRANT OPTION;"
-    mysql -uroot -p$DBPASSWORD -e "flush privileges;"
+    mysql -uroot --password=$DBPASSWORD -e "grant all privileges on *.* to 'root'@'%' identified by '$DBPASSWORD' WITH GRANT OPTION;"
+    mysql -uroot --password=$DBPASSWORD -e "flush privileges;"
     echo "*_*_*_*_* Done *_*_*_*_*";
 
     echo "*_*_*_*_* Commenting MySql Bind Address *_*_*_*_*";
@@ -142,8 +142,8 @@ then
     rm izzysoft.asc
 
     echo "*_*_*_*_* Adding Monitorix user to MySql *_*_*_*_*";
-    mysql -uroot -p$DBPASSWORD -e "CREATE USER 'monitorixuser'@'localhost' IDENTIFIED BY 'M-o-nitoriX$';" #User without any grant permission
-    mysql -uroot -p$DBPASSWORD -e "flush privileges;"
+    mysql -uroot --password=$DBPASSWORD -e "CREATE USER 'monitorixuser'@'localhost' IDENTIFIED BY 'M-o-nitoriX$';" #User without any grant permission
+    mysql -uroot --password=$DBPASSWORD -e "flush privileges;"
     echo "*_*_*_*_* Done *_*_*_*_*";
 
     MONITORIXCONF=/etc/monitorix/monitorix.conf
