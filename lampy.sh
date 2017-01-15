@@ -1,10 +1,10 @@
 # Script to Automate an installation of complete LAMP (Linux, Apache, Mysql, Python) with some bonus configurations
-# Copyright (C) 2016 Fardella Simone (fardella93@gmail.com) - All Rights Reserved
+# Copyright (C) 2016-2017 Fardella Simone (fardella93@gmail.com) - All Rights Reserved
 # Permission to copy and modify is granted under the author permission
-# Last revised 01/01/2017
+# Last revised 15/01/2017
 
 #!/usr/bin/env bash
-DBPASSWORD="<YOUR_PASSWORD>"
+DBPASSWORD="YourPassword"
 echo "*_*_*_*_*_*_*_*_ Running LAMP Automated installer *_*_*_*_*_*_*_*_";
 if [ "`lsb_release -is`" == "Ubuntu" ] || [ "`lsb_release -is`" == "Debian" ] || [ "`lsb_release -is`" == "Raspbian" ]
 then
