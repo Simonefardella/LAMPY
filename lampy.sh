@@ -1,7 +1,7 @@
 # Script to Automate an installation of complete LAMP (Linux, Apache, Mysql, Python) with some bonus configurations
 # Copyright (C) 2016-2017 Fardella Simone (fardella93@gmail.com) - All Rights Reserved
 # Permission to copy and modify is granted under the author permission
-# Last revised 15/01/2017
+# Last revised 08/07/2017
 
 #!/usr/bin/env bash
 DBPASSWORD="YourPassword"
