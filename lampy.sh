@@ -69,6 +69,7 @@ then
     apt-get install -y apache2-mpm-prefork;
     apt-get install -y python3-pip;
     apt-get install -y libapache2-mod-wsgi-py3;
+    apt-get install -y virtualenv;
 
     a2dismod mpm_event
     a2dismod mpm_worker
@@ -81,7 +82,6 @@ then
     a2enmod headers
     sed -i "s/<\/VirtualHost>/\n<Location \/serverstatus>\nSetHandler server-status\nAllow from all\n<\/Location>\n<Location \/serverinfo>\nSetHandler server-info\nAllow from all\n<\/Location>\n<\/VirtualHost>/g" /etc/apache2/sites-enabled/*.conf
     apachectl configtest
-    pip3 install virtualenv
     echo "*_*_*_*_* Done *_*_*_*_*";
 
     echo "*_*_*_*_* Assigning owner to /var/www folder and creating info.php file into php folder *_*_*_*_*";
@@ -116,18 +116,7 @@ then
         echo "*_*_*_*_* Done *_*_*_*_*";
 
         echo "*_*_*_*_* Configuring PagesSpeed Apache module *_*_*_*_*";
-        PAGESPEEDCONF=/etc/apache2/mods-available/pagespeed.conf
-        sed -i "s/ModPagespeed off/ModPagespeed on/g" $PAGESPEEDCONF
-        sed -i "s/\tModPagespeed off/\tModPagespeed on/g" $PAGESPEEDCONF
-        sed -i "s/# ModPagespeedRewriteLevel CoreFilters/ModPagespeedRewriteLevel CoreFilters/g" $PAGESPEEDCONF
-        sed -i "s/\tModPagespeedRewriteLevel CoreFilters/\tModPagespeedRewriteLevel CoreFilters/g" $PAGESPEEDCONF
-        sed -i "s/\t# ModPagespeedRewriteLevel CoreFilters/\tModPagespeedRewriteLevel CoreFilters/g" $PAGESPEEDCONF
-
-        sed -i "s/# ModPagespeedRewriteLevel PassThrough/\tModPagespeedRewriteLevel CoreFilters/g" $PAGESPEEDCONF
-        sed -i "s/ModPagespeedRewriteLevel PassThrough/ModPagespeedRewriteLevel CoreFilters/g" $PAGESPEEDCONF
-        sed -i "s/\t# ModPagespeedEnableFilters collapse_whitespace,elide_attributes/\tModPagespeedEnableFilters collapse_whitespace,elide_attributes/g" $PAGESPEEDCONF
-
-        sed -i "s/# ModPagespeedEnableFilters collapse_whitespace,elide_attributes/ModPagespeedEnableFilters collapse_whitespace,elide_attributes/g" $PAGESPEEDCONF
+        cp ./pagespeed.conf /etc/apache2/mods-enabled/
         chmod -R a+w /var/cache/mod_pagespeed
         echo "*_*_*_*_* Done *_*_*_*_*";
     else
