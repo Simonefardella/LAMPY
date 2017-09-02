@@ -168,18 +168,12 @@ then
     apt-get install -y smartmontools
     echo "*_*_*_*_* Done *_*_*_*_*";
 
-    echo "*_*_*_*_* Installing RabbitMQ Message Broker and autostarting*_*_*_*_*";
-    apt-get install -y rabbitmq-server
-    echo "*_*_*_*_* Done *_*_*_*_*";
-
-     echo "*_*_*_*_* Installing Supervisor daemon manager and copying the sample configuration of Celery and flower *_*_*_*_*";
-    apt-get install -y supervisor
-    cp ./message_broker.conf /etc/supervisor/conf.d/
+     echo "*_*_*_*_* Installing Supervisor daemon manager and copying the sample configuration of Django-rq worker *_*_*_*_*";
+    apt-get install -y supervisor redis-server
+    cp ./worker.conf /etc/supervisor/conf.d/
     supervisorctl update
     supervisorctl stop all #INITIALLY STOPPED
     echo "*_*_*_*_* Done *_*_*_*_*";
-
-
 
 
     apt-get update -y
